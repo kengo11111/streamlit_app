@@ -29,3 +29,10 @@ df_long = df.melt(
 # 列名（例: M100220_1次活動の平均時間（25～34歳）（女））から、
 # 「項目名」「年齢層」「性別」を抽出するための正規表現パターン
 pattern = r'_(.*?)（(.*?)）（(.*?)）'
+
+# 列名を1つずつ解析し、項目名・年齢層・性別を取り出す関数を定義する
+def parse(col):
+    m = re.search(pattern, col)
+    if m:   #None → False,　何か入ってるオブジェクト → True
+        return m.group(1), m.group(2), m.group(3)
+    return None, None, None
