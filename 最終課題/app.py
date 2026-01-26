@@ -46,7 +46,7 @@ df_long[['item', 'age', 'sex']] = (
 # 年度によって存在しない分類があるため、平均時間が欠損している行を除外する
 df_long = df_long.dropna(subset=['minutes'])   #minutes 列だけを見る
 
-
+# 抽出条件の指定
 with st.sidebar:
     st.subheader('抽出条件')
 
@@ -72,3 +72,12 @@ with st.sidebar:
         color = 'sex'
     else:
         color = 'age'
+
+# 「地域」と「年齢層」に一致する行だけを抽出
+df_plot = df_long[
+    (df_long['地域'] == region) &
+    (df_long['age'].isin(age))
+]
+
+# 「年度」という文字列を除去し、調査年を数値型に変換する
+df_plot['year'] = df_plot['調査年'].str.replace('年度', '').astype(int)
