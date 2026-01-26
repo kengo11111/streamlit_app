@@ -81,3 +81,17 @@ df_plot = df_long[
 
 # 「年度」という文字列を除去し、調査年を数値型に変換する
 df_plot['year'] = df_plot['調査年'].str.replace('年度', '').astype(int)
+
+# 散布図の作成
+fig = px.scatter(
+    df_plot,
+    x='year',
+    y='minutes',
+    color=color,
+    labels={
+        'year': '調査年',
+        'minutes': '平均時間（分）'
+    },
+    trendline='ols'
+)
+st.plotly_chart(fig)
