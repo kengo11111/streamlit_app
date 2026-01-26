@@ -36,3 +36,12 @@ def parse(col):
     if m:   #None → False,　何か入ってるオブジェクト → True
         return m.group(1), m.group(2), m.group(3)
     return None, None, None
+
+# 列名（raw_col）を解析し、項目名・年齢層・性別をそれぞれ新しい列として追加する
+df_long[['item', 'age', 'sex']] = (
+    df_long['raw_col']
+    .apply(lambda x: pd.Series(parse(x)))  #タプルを Series（1行分の小さな表）に変換
+)
+
+# 年度によって存在しない分類があるため、平均時間が欠損している行を除外する
+df_long = df_long.dropna(subset=['minutes'])   #minutes 列だけを見る
