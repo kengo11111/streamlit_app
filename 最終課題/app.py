@@ -98,7 +98,8 @@ fig = px.scatter(
         'year': '調査年',
         'minutes': '平均時間（分）'
     },
-    trendline='ols'
+    trendline='ols',
+    title='年次別平均活動時間の推移'
 )
 st.plotly_chart(fig)
 
@@ -109,7 +110,7 @@ fig2 = px.box(
     labels={
         'minutes': '平均時間（分）'
     },
-    title='分類別の分布（ばらつき）'
+    title='分類別平均活動時間の分布'
 )
 
 st.plotly_chart(fig2)
