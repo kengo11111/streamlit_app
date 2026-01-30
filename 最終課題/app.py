@@ -101,3 +101,15 @@ fig = px.scatter(
     trendline='ols'
 )
 st.plotly_chart(fig)
+
+fig2 = px.box(
+    df_plot,
+    x=color,
+    y='minutes',
+    labels={
+        'minutes': '平均時間（分）'
+    },
+    title='分類別の分布（ばらつき）'
+)
+
+st.plotly_chart(fig2)
