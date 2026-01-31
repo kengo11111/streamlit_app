@@ -24,8 +24,8 @@ activity_en = activity_map[activity]
 # 読み込むCSVを日本語選択に応じて切り替える
 df = pd.read_csv(f'{activity_en}.csv', encoding='shift_jis')
 
-# 年度と地域は識別用の列として保持する
-id_cols = ['調査年', '地域']
+# 年度は識別用の列として保持する
+id_cols = ['調査年']
 
 # Mから始まる列（性別・年齢層ごとの平均時間）だけを抽出する
 value_cols = [c for c in df.columns if c.startswith('M')]
@@ -101,7 +101,6 @@ fig = px.scatter(
     trendline='ols',
     title='年次別平均活動時間の推移'
 )
-st.plotly_chart(fig)
 
 fig2 = px.box(
     df_plot,
@@ -113,4 +112,10 @@ fig2 = px.box(
     title='分類別平均活動時間の分布'
 )
 
-st.plotly_chart(fig2)
+tab1, tab2 = st.tabs(['年次推移', '分布の比較'])
+
+with tab1:
+    st.plotly_chart(fig)
+
+with tab2:
+    st.plotly_chart(fig2)
